@@ -1,0 +1,9 @@
+services:
+  node:
+    image: node:22.0
+    volumes:
+      - ./:/app
+    working_dir: /app
+    stdin_open: true
+    ports:
+      - 5173:5173
