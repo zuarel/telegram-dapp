@@ -31,8 +31,12 @@ export default class Counter implements Contract {
     });
   }
 
-  async getCounter(provider: ContractProvider) {
-    const { stack } = await provider.get("counter", []);
-    return stack.readBigNumber();
+  async getCounter(provider: ContractProvider): Promise<bigint> {
+    try {
+      const { stack } = await provider.get("counter", []);
+      return stack.readBigNumber();
+    } catch (error) {
+      return this.getCounter(provider);
+    }
   }
 }
